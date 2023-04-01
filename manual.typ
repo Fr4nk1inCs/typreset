@@ -5,11 +5,6 @@
   author: "Author",
   date: none,
   logo: none,
-  preface: [
-    This is the manual for the
-    #link("https://github.com/Fr4nk1in-USTC/typst-notebook")[typst-notebook]
-    template.
-  ]
 )
 
 = Manual

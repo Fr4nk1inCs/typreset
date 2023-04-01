@@ -44,20 +44,26 @@
   v(2.4fr)
   pagebreak()
 
-  [
-    = Preface
-  ]
+  if preface != none {
+    [
+      = Preface
+    ]
 
-  preface
+    preface
+    pagebreak()
+
+    // Table of contents
+    [
+      = Contents
+    ]
+
+    outline(title: none, depth: 3, indent: true)
+  } else {
+    outline(depth: 3, indent: true)
+  }
+
   pagebreak()
 
-  // Table of contents
-  [
-    = Contents
-  ]
-
-  outline(title: none, depth: 3, indent: true)
-  pagebreak()
 
   // Main body
   set par(justify: true)
