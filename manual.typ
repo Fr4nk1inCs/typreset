@@ -3,8 +3,13 @@
 #show: note.with(
   title: "Notebook",
   author: "Author",
-  date: none, 
-  logo: none
+  date: none,
+  logo: none,
+  preface: [
+    This is the manual for the
+    #link("https://github.com/Fr4nk1in-USTC/typst-notebook")[typst-notebook]
+    template.
+  ]
 )
 
 = Manual
@@ -121,11 +126,11 @@ You can define your own envs from the `base_env` function. For example, the
 You can make a new `remark` env like this:
 
 ```typst
-#let recall(body, name: none, numbered: false) = {
+#let recall(body, name: none) = {
   base_env(
     type: "Recall",
     name: name,
-    numbered: numbered,
+    numbered: false,
     fg: luma(40%),
     bg: luma(80%),
     body
@@ -133,11 +138,11 @@ You can make a new `remark` env like this:
 }
 ```
 
-#let recall(body, name: none, numbered: false) = {
+#let recall(body, name: none) = {
   base_env(
     type: "Recall",
     name: name,
-    numbered: numbered,
+    numbered: false,
     fg: luma(40%),
     bg: luma(90%),
     body

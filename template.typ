@@ -1,9 +1,9 @@
-#let note(title: "Note title", author: "Name", logo: none, date: none, 
-      code_with_line_number: true, body) = {
+#let note(title: "Note title", author: "Name", logo: none, date: none,
+          preface: none, code_with_line_number: true, body) = {
   // Set the document's basic properties.
   set document(author: (author, ), title: title)
   set page(
-    numbering: "1", 
+    numbering: "1",
     number-align: end,
     // Running header.
     header-ascent: 14pt,
@@ -11,7 +11,7 @@
       let i = counter(page).at(loc).first()
       if i == 1 { return }
       set text(size: 8pt)
-      if calc.odd(i) { align(start, title) } else { align(end, title) }
+      if calc.odd(i) { align(end, title) } else { align(start, title) }
     }),
   )
   set text(font: "New Computer Modern", lang: "en")
@@ -44,15 +44,25 @@
   v(2.4fr)
   pagebreak()
 
-  // Heading
-  set heading(numbering: "1.")
+  [
+    = Preface
+  ]
+
+  preface
+  pagebreak()
 
   // Table of contents
-  outline(depth: 3, indent: true)
+  [
+    = Contents
+  ]
+
+  outline(title: none, depth: 3, indent: true)
   pagebreak()
 
   // Main body
   set par(justify: true)
+
+  set heading(numbering: "1.")
 
   // Code
   show raw.where(block: false): box.with(
@@ -82,14 +92,14 @@
     grid(
       columns: (auto, 1fr),
       align(
-        right, 
+        right,
         block(
           inset: (
-            top: 10pt, 
-            bottom: 0pt, 
-            left: 0pt, 
+            top: 10pt,
+            bottom: 0pt,
+            left: 0pt,
             right: 5pt
-          ), 
+          ),
           left_str
         )
       ),
@@ -102,38 +112,42 @@
 
 // Theorem and definition environments.
 
-#let base_env(type: "Theorem", name: none, numbered: true, fg: black, bg: white, 
+#let base_env(type: "Theorem", name: none, numbered: true, fg: black, bg: white,
           body) = locate(
-  location => {
-    let lvl = counter(heading).at(location)
-    let i = counter(type).at(location).first()
-    let top = if lvl.len() > 0 { lvl.first() } else { 0 }
-    show: block.with(spacing: 11.5pt)
-    stack(
-      dir: ttb,
-      rect(fill: fg, radius: (top-right: 5pt), stroke: fg)[
-        #strong(
-          text(white)[
-            #type
-            #if numbered [ #top.#i.]
-            #if name != none [ (#name) ]
-          ]
-        )
-      ],
-      rect(width: 100%,
-        fill: bg,
-        radius: ( right: 5pt ),
-        stroke: (
-          left: fg,
-          right: bg + 0pt,
-          top: bg + 0pt,
-          bottom: bg + 0pt,
-        )
-      )[
-        #emph(body)
-      ]
-    )
-  }
+    location => {
+      let lvl = counter(heading).at(location)
+      let i = counter(type).at(location).first()
+      let top = if lvl.len() > 0 { lvl.first() } else { 0 }
+      show: block.with(spacing: 11.5pt)
+      stack(
+        dir: ttb,
+        rect(fill: fg, radius: (top-right: 5pt), stroke: fg)[
+          #strong(
+            text(white)[
+              #type
+              #if numbered {
+                counter(type).step()
+                [ #top.#i.]
+              }
+              #if name != none [ (#name) ]
+            ]
+          )
+        ],
+        rect(width: 100%,
+          fill: bg,
+          radius: ( right: 5pt ),
+          stroke: (
+            left: fg,
+            right: bg + 0pt,
+            top: bg + 0pt,
+            bottom: bg + 0pt,
+          )
+        )[
+          #emph(body)
+        ]
+      )
+    }
+  )
 )
 
 #let theorem(body, name: none, numbered: true) = {
