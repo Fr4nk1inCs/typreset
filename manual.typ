@@ -1,13 +1,13 @@
 #import "template.typ": *
 
 #show: note.with(
-  title: "Notebook",
-  author: "Author",
+  title: "Manual",
+  author: "Fr4nk1in-USTC",
   date: none,
   logo: none,
 )
 
-= Manual
+= Environments <env>
 
 == Presets
 
@@ -17,6 +17,7 @@ The following presets are available.
 
 #definition[
   #lorem(20)
+  测试
 ]
 
 ```typst
@@ -156,3 +157,97 @@ It will look like this:
 ]
 ```
 
+#pagebreak()
+
+#(chinese = true)
+#set text(font: ("Times New Roman", "FandolSong"), lang: "zh")
+#set heading(numbering: (..nums) => {
+  let nums = nums.pos()
+  let length = nums.len();
+  if length == 1 {
+    if chinese {
+      let num = nums.first()
+      let count = ""
+      while num != 0 {
+        count = "零一二三四五六七八九".at(3 * calc.mod(num, 10)) + count
+        num = calc.floor(num / 10)
+      }
+      "第" + count + "章"
+    } else {
+      "Chapter " + str(nums.first()) + "."
+    }
+  } else {
+    nums.map(str).join(".")
+  }
+})
+
+#align(center, block(inset: 5pt, radius: 5pt, fill: luma(240), align(left)[
+  From now on, Simplified Chinese is supported. You can see the difference in 
+  the fonts and other things. 
+
+  *Note* that you should have *Fandol* font in *True Type* installed 
+  *systemwide* to let Typst detect the font correctly. 
+]))
+
+= 简体中文支持 Simplified Chinese Support
+
+== 主要变化 Major changes
+
+We use Fandol fonts (the same as LaTeX's Ctex package's choice) for Chinese.
+Due to Typst's font management and some small issues, we choose
+_Times New Roman_ for Latin characters.
+
+To enable Chinese Support, change the first line of the template from
+
+```typst
+#let chinese = false
+```
+
+to
+
+```typst
+#let chinese = true
+```
+
+After changing the first line, the label of envirments in @env
+will also be in Chinese:
+  - Definition $->$ 定义
+  - Theorem $->$ 定理
+  - Corollary $->$ 推论
+  - Lemma $->$ 引理
+  - Proof $->$ 证明
+
+== 演示 Demo
+
+#show emph: it => {
+  text(font: ("Times New Roman", "FandolKai"), style: "italic", it.body)
+}
+
+- Plain: 默认 plain
+- Bold: *粗体 bold*
+- Emph: _斜体 emph_
+
+#let theorem(body, name: none, numbered: true) = {
+  base_env(
+    type: if chinese { "定理" } else { "Theorem" },
+    name: name,
+    numbered: numbered,
+    fg: blue,
+    bg: rgb("#e8e8f8"),
+    body
+  )
+}
+
+#let proof(body) = block(spacing: 11.5pt, {
+  emph[ #if chinese { "证明" } else { "Proof." }]
+  [ ] + body
+  h(1fr)
+  box(scale(160%, origin: bottom + right, sym.square.stroked))
+})
+
+#theorem[
+  #lorem(20)
+  这是一条定理.
+]
+
+#proof[#lorem(20)]
