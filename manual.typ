@@ -185,8 +185,8 @@ It will look like this:
   From now on, Simplified Chinese is supported. You can see the difference in 
   the fonts and other things. 
 
-  *Note* that you should have *Fandol* font in *True Type* installed 
-  *systemwide* to let Typst detect the font correctly. 
+  *Note* that you should have *Fandol* font in *True Type* installed to let
+  Typst detect the font correctly. 
 ]))
 
 = 简体中文支持 Simplified Chinese Support
