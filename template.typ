@@ -1,21 +1,7 @@
-#let chinese = false
-
-#let normal-font = if chinese {
-  ("Times New Roman"," FandolSong")
-} else {
-  "New Computer Modern"
-}
-#let emph-font = if chinese {
-  ("Times New Roman", "FandolKai")
-} else {
-  "New Computer Modern"
-}
-
 #let note(title: "Note title", author: "Name", logo: none, date: none,
           preface: none, code_with_line_number: true, body) = {
-  // Document's basic properties
+  // Set the document's basic properties.
   set document(author: (author, ), title: title)
-  // Page setting
   set page(
     numbering: "1",
     number-align: end,
@@ -26,21 +12,17 @@
       if i == 1 { return }
       set text(size: 8pt)
       if calc.odd(i) { align(end, title) } else { align(start, title) }
-      v(-1em)
-      line(length: 100%, stroke: 0.5pt)
     }),
   )
-  // Font and language
-  set text(font: normal-font, lang: if chinese { "zh" } else { "en" })
-  show emph: text.with(font: emph-font)
-  // Equation font
+  set text(font: "New Computer Modern", lang: "en")
   show math.equation: set text(font: "New Computer Modern Math", weight: 400)
-  // Paragraph spacing
-  show par: set block(above: 1.2em, below: 1.2em)
-  set par(leading: 0.75em, justify: true)
 
-  // Contents
-  // Title page
+  // Set paragraph spacing.
+  show par: set block(above: 1.2em, below: 1.2em)
+
+  set par(leading: 0.75em)
+
+  // Title page.
   // The page can contain a logo if you pass one with `logo: "logo.png"`.
   v(0.6fr)
   if logo != none {
@@ -61,8 +43,7 @@
 
   v(2.4fr)
   pagebreak()
-  
-  // Preface
+
   if preface != none {
     [
       = Preface
@@ -83,40 +64,11 @@
 
   pagebreak()
 
-  set heading(numbering: (..nums) => {
-    let nums = nums.pos()
-    let length = nums.len();
-    if length == 1 {
-      if chinese {
-        let num = nums.first()
-        let count = ""
-        while num != 0 {
-          count = "零一二三四五六七八九".at(3 * calc.mod(num, 10)) + count
-          num = calc.floor(num / 10)
-        }
-        "第" + count + "章"
-      } else {
-        "Chapter " + str(nums.first()) + "."
-      }
-    } else {
-      nums.map(str).join(".")
-    }
-  })
-  show heading: it => {
-    // Create the heading numbering.
-    let number = if it.numbering != none {
-      counter(heading).display(it.numbering)
-      h(7pt, weak: true)
-    }
-    // Level 1 headings are centered and smallcaps.
-    // The other ones are run-in.
-    if it.level == 1 {
-      v(0.5em)
-      set align(center)
-    }
-    number
-    it.body
-  }
+
+  // Main body
+  set par(justify: true)
+
+  set heading(numbering: "1.")
 
   // Code
   show raw.where(block: false): box.with(
@@ -206,7 +158,7 @@
 
 #let theorem(body, name: none, numbered: true) = {
   base_env(
-    type: if chinese { "定理" } else { "Theorem" },
+    type: "Theorem",
     name: name,
     numbered: numbered,
     fg: blue,
@@ -217,7 +169,7 @@
 
 #let definition(body, name: none, numbered: true) = {
   base_env(
-    type: if chinese { "定义" } else { "Definition" },
+    type: "Definition",
     name: name,
     numbered: numbered,
     fg: orange,
@@ -228,7 +180,7 @@
 
 #let lemma(body, name: none, numbered: true) = {
   base_env(
-    type: if chinese { "引理" } else { "Lemma" },
+    type: "Lemma",
     name: name,
     numbered: numbered,
     fg: purple,
@@ -239,7 +191,7 @@
 
 #let corollary(body, name: none, numbered: true) = {
   base_env(
-    type: if chinese { "推论" } else { "Corollary" },
+    type: "Corollary",
     name: name,
     numbered: numbered,
     fg: green,
@@ -250,7 +202,7 @@
 
 // Proof environment
 #let proof(body) = block(spacing: 11.5pt, {
-  emph[ #if chinese { "证明" } else { "Proof." }]
+  emph[Proof.]
   [ ] + body
   h(1fr)
   box(scale(160%, origin: bottom + right, sym.square.stroked))
