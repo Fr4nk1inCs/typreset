@@ -1,8 +1,8 @@
 #import "template.typ": *
 
 #show: note.with(
-  title: "Notebook",
-  author: "Author",
+  title: "Manual",
+  author: "Fr4nk1in-USTC",
   date: none,
   logo: none,
 )
