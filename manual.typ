@@ -106,43 +106,30 @@ You can define your own envs from the `base_env` function. For example, the
 `theorem` env is defined like this:
 
 ```typst
-#let theorem(body, name: none, numbered: true) = {
-  base_env(
-    type: "Theorem",
-    name: name,
-    numbered: numbered,
-    fg: blue,
-    bg: rgb("#e8e8f8"),
-    body
-  )
-}
+#let theorem = base_env.with(
+  type: "Theorem",
+  fg: blue,
+  bg: rgb("#e8e8f8"),
+)
 ```
 
-You can make a new `remark` env like this:
+You can make a new `recall` env like this:
 
 ```typst
-#let recall(body, name: none) = {
-  base_env(
-    type: "Recall",
-    name: name,
-    numbered: false,
-    fg: luma(40%),
-    bg: luma(80%),
-    body
-  )
-}
+#let recall = base_env.with(
+  type: "Recall",
+  numbered: false,
+  fg: luma(40%),
+  bg: luma(80%),
+)
 ```
 
-#let recall(body, name: none) = {
-  base_env(
-    type: "Recall",
-    name: name,
-    numbered: false,
-    fg: luma(40%),
-    bg: luma(90%),
-    body
-  )
-}
+#let recall = base_env.with(
+  type: "Recall",
+  numbered: false,
+  fg: luma(40%),
+  bg: luma(80%),
+)
 
 It will look like this:
 

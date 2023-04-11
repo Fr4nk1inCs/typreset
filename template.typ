@@ -102,7 +102,7 @@
         block(
           inset: (
             top: 10pt,
-            bottom: 0pt,
+            bottom: 10pt,
             left: 0pt,
             right: 5pt
           ),
@@ -156,49 +156,29 @@
   )
 )
 
-#let theorem(body, name: none, numbered: true) = {
-  base_env(
-    type: "Theorem",
-    name: name,
-    numbered: numbered,
-    fg: blue,
-    bg: rgb("#e8e8f8"),
-    body
-  )
-}
+#let theorem = base_env.with(
+  type: "Theorem",
+  fg: blue,
+  bg: rgb("#e8e8f8"),
+)
 
-#let definition(body, name: none, numbered: true) = {
-  base_env(
-    type: "Definition",
-    name: name,
-    numbered: numbered,
-    fg: orange,
-    bg: rgb("#f8e8e8"),
-    body
-  )
-}
+#let definition = base_env.with(
+  type: "Definition",
+  fg: orange,
+  bg: rgb("#f8e8e8"),
+)
 
-#let lemma(body, name: none, numbered: true) = {
-  base_env(
-    type: "Lemma",
-    name: name,
-    numbered: numbered,
-    fg: purple,
-    bg: rgb("#efe6ff"),
-    body
-  )
-}
+#let lemma = base_env.with(
+  type: "Lemma",
+  fg: purple,
+  bg: rgb("#efe6ff"),
+)
 
-#let corollary(body, name: none, numbered: true) = {
-  base_env(
-    type: "Corollary",
-    name: name,
-    numbered: numbered,
-    fg: green,
-    bg: rgb("#e8f8e8"),
-    body
-  )
-}
+#let corollary = base_env.with(
+  type: "Corollary",
+  fg: green,
+  bg: rgb("#e8f8e8"),
+)
 
 // Proof environment
 #let proof(body) = block(spacing: 11.5pt, {
