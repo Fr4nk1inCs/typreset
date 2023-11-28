@@ -1,5 +1,5 @@
 [package]
-name = "preset-collection"
+name = "typreset"
 version = "0.1.0"
 entrypoint = "src/lib.typ"
 authors = ["Fr4nk1inCs"]
