@@ -1,0 +1,7 @@
+[package]
+name = "preset-collection"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["Fr4nk1inCs"]
+license = "MIT"
+description = "A collection of typst presets for my daily writing."
