@@ -18,7 +18,7 @@ At this time there is no release of this project. You need to manually configure
   For example, in Linux, it is `~/.local/share/typst/packages/local/typreset/0.1.0`:
   ```bash
   mkdir -p ~/.local/share/typst/packages/local/typreset/
-  git clone https://github.com/typst/typreset.git ~/.local/share/typst/packages/local/typreset/0.1.0
+  git clone https://github.com/Fr4nk1inCs/typreset.git ~/.local/share/typst/packages/local/typreset/0.1.0
   ```
 Then you can use the presets in your Typst project:
 ```typ
