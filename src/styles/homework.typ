@@ -2,7 +2,7 @@
 
 #let i18n-hw-lit = (
   "en": " Homework",
-  "zh": "作业",
+  "zh-cn": "作业",
 )
 
 #let style(course: "Course Name", number: 0, names: "Student Name", ids: "Student ID", lang: "en", body) = {
