@@ -9,14 +9,15 @@
   let names = if type(names) == str { (names, ) } else { names }
   let ids = if type(ids) == str { (ids, ) } else { ids }
 
+
   assert(names.len() == ids.len(), message: "Number of names and IDs do not match")
-  
+
   let hw-literal = i18n-hw-lit.at(lang)
 
   // style
   show: set-font.with(lang: lang)
   set par(linebreaks: "optimized", justify: true)
-  
+
   // document
   let title = course + hw-literal + " " + str(number)
   let header = none
@@ -48,8 +49,13 @@
     header-ascent: 14pt,
     header: header,
   )
-  
+
   // title
+  let title-ids = if lang.contains("zh") {
+    ids.map(id => { v(0.2em) + id })
+  } else {
+    ids
+  }
   align(center)[
     #strong(text(size: 1.75em, title))
 
@@ -57,7 +63,7 @@
       columns: 2,
       column-gutter: 1em,
       row-gutter: 0.4em,
-      ..names.zip(ids).flatten()
+      ..names.zip(title-ids).flatten()
     )
   ]
 
