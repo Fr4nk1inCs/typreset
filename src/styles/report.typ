@@ -41,6 +41,7 @@
   }
 
   set document(title: title, author: authors)
+  show heading: strong
   set page(
     numbering: "1",
     number-align: center,
