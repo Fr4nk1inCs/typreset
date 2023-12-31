@@ -3,9 +3,10 @@
 A collection of [Typst](https://typst.app) presets to provide a starting point for your writing.
 
 Available presets:
-- `font.set-font()`: Chinese & English Font support
+- `font.set-font()`: Chinese & English Font support.
 - `homework`: Homework template with `simple_question` and `complex_question` frame to write your homework.
-- `thm-envs`: Minimal theorem environments with `theorem`, `lemma`, `corollary`,  `definition` and `proof` environment presets. Tweaked from [typst-theorems](https://github.com/sahasatvik/typst-theorems)
+- `report`: Report template to write your report.
+- `thm-envs`: Minimal theorem environments with `theorem`, `lemma`, `corollary`,  `definition` and `proof` environment presets. Tweaked from [typst-theorems](https://github.com/sahasatvik/typst-theorems).
 
 At this time there is no manual or handbook for this project. But our `tests/` directory contains some examples of how to use this project.
 
@@ -24,3 +25,7 @@ Then you can use the presets in your Typst project:
 ```typ
 #import "@local/typreset:0.1.0": *
 ```
+
+## Fonts
+
+For font support, see [the `fonts` branch](https://github.com/Fr4nk1inCs/typreset/tree/fonts) of this repository.
