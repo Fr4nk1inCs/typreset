@@ -1,65 +1,38 @@
-#import "../general/font.typ": set-font
-
-#let i18n-report-lit = (
-  "en": " Report",
-  "zh-cn": "报告",
-)
+#import "./basic.typ": base-style
+#import "../utils/title.typ": make-title
+#import "../utils/header.typ": make-header
 
 #let style(report-name: "Report Name", authors: "Student Name", lang: "en", body) = {
   let authors = if type(authors) == str { (authors, ) } else { authors }
 
-  let report-lit = i18n-report-lit.at(lang)
+  let title = report-name
 
-  // heading
-  show heading: strong
-
-  // style
-  show: set-font.with(lang: lang)
-  set par(linebreaks: "optimized", justify: true)
-
-  // document
-  let title = report-name + report-lit
-  let header = none
-  if authors.len() == 1 {
-    let author-text = authors.at(0)
-    header = locate(loc => {
-      let page-index = counter(page).at(loc).first()
-      if page-index == 1 { return }
-      set text(size: 8pt)
-      grid(
-        columns: (auto, 1fr),
-        align(left, title),
-        align(right, text(author-text)),
-      )
-    })
-  } else {
-    header = locate(loc => {
-      let page-index = counter(page).at(loc).first()
-      if page-index == 1 { return }
-      align(center, text(size: 8pt, title))
-    })
-  }
-
+  show: base-style.with(lang: lang)
   set document(title: title, author: authors)
-  show heading: strong
+
+  let header = if authors.len() == 1 {
+    grid(
+      columns: (auto, 1fr),
+      align(left, title),
+      align(right, authors.at(0)),
+    )
+  } else {
+    title
+  }
   set page(
-    numbering: "1",
-    number-align: center,
-    // Running header
     header-ascent: 14pt,
-    header: header,
+    header: make-header(header),
   )
 
   // title
-  align(center)[
-    #strong(text(size: 1.75em, title))
-
-    #grid(
+  make-title(
+    title: title,
+    other: grid(
       columns: 1,
       row-gutter: 0.4em,
       ..authors.flatten()
     )
-  ]
+  )
 
   body
 }
