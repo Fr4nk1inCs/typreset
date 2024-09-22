@@ -6,6 +6,7 @@
 
 #let i18n-fonts = (
   "zh-cn": body => {
+    show math.equation: set text(font: ("Libertinus Math", "FandolSong"))
     set text(font: (base-font, "FandolSong"), lang: "zh")
     show emph: set text(font: (base-font, "FandolKai"))
 
@@ -14,7 +15,6 @@
 )
 
 #let set-font(lang: "en", body) = {
-  show math.equation: set text(font: "Libertinus Math")
 
   if lang == "en" {
     set text(font: base-font, lang: "en")
