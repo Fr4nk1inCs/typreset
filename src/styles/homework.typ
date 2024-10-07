@@ -4,7 +4,7 @@
 
 #let i18n-hw-lit = (
   "en": " Homework",
-  "zh-cn": "作业",
+  "zh": "作业",
 )
 
 #let style(
@@ -13,6 +13,7 @@
   names: "Student Name",
   ids: "Student ID",
   lang: "en",
+  hw-literal: none,
   body,
 ) = {
   let names = if type(names) == str {
@@ -30,7 +31,11 @@
     message: "Number of names and IDs do not match",
   )
 
-  let hw-literal = i18n-hw-lit.at(lang)
+  let hw-literal = if hw-literal == none {
+    i18n-hw-lit.at(lang)
+  } else {
+    hw-literal
+  }
   let title = course + hw-literal + " " + str(number)
 
   show: base-style.with(lang: lang)
