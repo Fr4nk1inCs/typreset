@@ -7,7 +7,6 @@ Available presets:
 - `font.set-font()`: Chinese & English Font support.
 - `homework`: Homework template with `simple_question` and `complex_question` frame to write your homework.
 - `report`: Report template to write your report.
-- `thm-envs`: Minimal theorem environments with `theorem`, `lemma`, `corollary`, `definition` and `proof` environment presets. Tweaked from [typst-theorems](https://github.com/sahasatvik/typst-theorems).
 
 At this time there is no manual or handbook for this project. But our `tests/` directory contains some examples of how to use this project.
 
