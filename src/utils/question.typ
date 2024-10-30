@@ -7,28 +7,30 @@
 #let simple_question(
   heading-counter: false,
   number: auto,
-  desc
-) = locate(loc => {
-  set text(weight: "bold")
-  if number == auto {
-    question_counter.step()
-    if heading-counter {
-      str(counter(heading).at(loc).first()) + "." + question_counter.display("1.")
+  desc,
+) = (
+  context {
+    set text(weight: "bold")
+    if number == auto {
+      question_counter.step()
+      if heading-counter {
+        str(counter(heading)) + "." + question_counter.display("1.")
+      } else {
+        question_counter.display("1.")
+      }
     } else {
-      question_counter.display("1.")
+      if type(number) == int {
+        str(number) + "."
+      } else {
+        number
+      }
     }
-  } else {
-    if type(number) == int {
-      str(number) + "."
-    } else {
-      number
-    }
+    desc
+    v(-0.9em)
+    line(length: 100%)
+    v(-0.6em)
   }
-  desc
-  v(-0.9em)
-  line(length: 100%)
-  v(-0.6em)
-})
+)
 
 // complex question frame
 // - heading-counter(bool): whether to show heading counter
@@ -37,24 +39,26 @@
 #let complex_question(
   heading-counter: false,
   number: auto,
-  desc
-) = locate(loc => {
-  let number = if number == auto {
-    question_counter.step()
-    if heading-counter {
-      str(counter(heading).at(loc).first()) + "." + question_counter.display("1.")
+  desc,
+) = (
+  context {
+    let number = if number == auto {
+      question_counter.step()
+      if heading-counter {
+        str(counter(heading)) + "." + question_counter.display("1.")
+      } else {
+        question_counter.display("1.")
+      }
     } else {
-      question_counter.display("1.")
+      if type(number) == int {
+        str(number) + "."
+      } else {
+        number
+      }
     }
-  } else {
-    if type(number) == int {
-      str(number) + "."
-    } else {
-      number
-    }
-  }
-  rect(width: 100%, radius: 5pt)[
+    rect(width: 100%, radius: 5pt)[
       #strong(number)
       #desc
-  ]
-})
+    ]
+  }
+)

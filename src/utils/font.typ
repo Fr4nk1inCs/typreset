@@ -1,6 +1,6 @@
 /* Font settings for all presets */
 
-#let base-font = "Linux Libertine"
+#let base-font = "Libertinus Serif"
 
 #let math-font = "Libertinus Math"
 
@@ -18,6 +18,7 @@
 
   if lang == "en" {
     set text(font: base-font, lang: "en")
+    show math.equation: set text(font: "Libertinus Math")
     body
   } else if lang in i18n-fonts.keys() {
     show: i18n-fonts.at(lang)
