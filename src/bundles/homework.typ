@@ -1,2 +1,2 @@
-#import "../styles/homework.typ": style
-#import "../utils/question.typ": simple_question, complex_question
+#import "../styles/homework.typ": template
+#import "../utils/question.typ": question, simple-question, complex-question
