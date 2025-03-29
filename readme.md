@@ -4,15 +4,16 @@ A collection of [Typst](https://typst.app) presets to provide a starting point f
 
 Available presets:
 
-- `font.set-font()`: Chinese & English Font support.
-- `homework`: Homework template with `simple_question` and `complex_question` frame to write your homework.
-- `report`: Report template to write your report.
+- `set-font()`: Chinese & English Font support.
+- `typesetting`: A typesetting preset.
+- `template`: A template for writing a document.
+- `homework`: Homework template and `simple-question` and `complex-question` frame to write your homework.
 
-At this time there is no manual or handbook for this project. But our `tests/` directory contains some examples of how to use this project.
+There are some manuals/docs in the `docs` folder.
 
 ## Usage
 
-Typrest supports Typst 0.6.0 and newer.
+Typrest supports Typst 0.12.0 and newer.
 
 At this time there is no release of this project. You need to manually configure your local Typst packages.
 
@@ -20,26 +21,56 @@ At this time there is no release of this project. You need to manually configure
 
   ```bash
   mkdir -p ~/.local/share/typst/packages/local/typreset/
-  git clone https://github.com/Fr4nk1inCs/typreset.git ~/.local/share/typst/packages/local/typreset/0.1.0
+  git clone https://github.com/Fr4nk1inCs/typreset.git ~/.local/share/typst/packages/local/typreset/0.2.0
   ```
 
 Then you can use the presets in your Typst project:
 
 ```typ
-#import "@local/typreset:0.1.0": *
+#import "@local/typreset:0.2.0": *
 ```
 
-## Fonts
+## Examples
 
-The default font family for English is [Linux Libertine](https://linuxlibertine.sourceforge.net/Libertine-EN.html). It's bundled with Typst, so you don't need to install it.
+### Basic Template
 
-The default math font is [Libertinus](https://github.com/alerque/libertinus) Math, which you need to install manually.
-For Arch-based Linux distributions, you can install it from `libertinus-font`
-package in `extra` repository. You can also install it from
-[its GitHub release page](https://github.com/alerque/libertinus/releases).
+```typ
+#import "@local/typreset:0.2.0": template
 
-### Language-specific Fonts
+#set page(height: auto)
+#show: template.with(
+  title: ("Example of typreset.template", [Example of `typreset.template`]),
+  author-infos: "Author"
+)
 
-#### Simplified Chinese
+#lorem(100)
+```
 
-Typreset uses the [fandol](https://ctan.org/pkg/fandol) fonts as the default simplified Chinese fonts in Typreset. If you want to use these fonts, you need to [install them](https://mirrors.ctan.org/fonts/fandol.zip).
+![template.png](./assets/template.png)
+
+For more examples, please see [`docs/template.pdf`](./docs/template.pdf).
+
+### Homework
+
+```typ
+#import "@local/typreset:0.2.0": homework
+
+#set page(height: auto)
+#show: homework.template.with(
+  course: "Course Name",
+  number: 1,
+  student-infos: ((name: "Student", id: "ID"),),
+)
+
+#homework.simple-question[
+  A `simple-question` frame.
+]
+
+#homework.complex-question[
+  A `complex-question` frame.
+]
+```
+
+![homework.png](./assets/homework.png)
+
+For more examples, please see [`docs/homework-template.pdf`](./docs/homework.pdf).
