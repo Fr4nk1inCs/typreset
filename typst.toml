@@ -1,7 +1,8 @@
 [package]
 name = "typreset"
-version = "0.1.0"
+version = "0.2.0"
 entrypoint = "src/lib.typ"
 authors = ["Fr4nk1inCs"]
 license = "MIT"
 description = "A collection of typst presets for my daily writing."
+
