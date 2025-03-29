@@ -1,70 +1,59 @@
-#import "./basic.typ": base-style
-#import "../utils/title.typ": make-title
-#import "../utils/header.typ": make-header
+#import "./basic.typ": template as base-template
 
-#let i18n-hw-lit = (
-  "en": " Homework",
-  "zh": "作业",
-)
-
-#let style(
-  course: "Course Name",
-  number: 0,
-  names: "Student Name",
-  ids: "Student ID",
+/// Template for homework
+///
+/// - lang (str): language identifier used in `set text(lang: lang)`
+/// - use-patch (bool | (list?: bool, enum?: bool)):
+///   whether to use the patch for list and/or enum, default enabled when
+///   ignored
+/// - course (str): course name
+/// - number (int): homework number
+/// - transform-title (auto | (course: str, number: int) -> str):
+///   title transformation function, default to `auto`, which generates the
+///   title as `"{course}{hw-literal} {number}"` where `hw-literal` is
+///   " Homework" in English and "作业" in Chinese
+/// - student-infos (array[(name: str, id: str)]): list of student names and ids
+/// - team-name (str | none): team name. When set to a string, the team name
+//    will be displayed in the header. This is useful when there are multiple
+//    students, since the header only handles the case that there is only one
+//    student
+/// - body (content): content
+/// -> content
+#let template(
   lang: "en",
-  hw-literal: none,
+  use-patch: true,
+  course: "Course Name",
+  number: 1,
+  transform-title: auto,
+  student-infos: ((name: "Student Name", id: "Student ID"),),
+  team-name: none,
   body,
 ) = {
-  let names = if type(names) == str {
-    (names,)
-  } else {
-    names
-  }
-  let ids = if type(ids) == str {
-    (ids,)
-  } else {
-    ids
-  }
-  assert(
-    names.len() == ids.len(),
-    message: "Number of names and IDs do not match",
-  )
-
-  let hw-literal = if hw-literal == none {
-    i18n-hw-lit.at(lang)
-  } else {
-    hw-literal
-  }
-  let title = course + hw-literal + " " + str(number)
-
-  show: base-style.with(lang: lang)
-  set document(title: title, author: names)
-
-  // header
-  let header = if names.len() == 1 {
-    grid(
-      columns: (auto, 1fr),
-      align(left, title), align(right, names.at(0) + " " + ids.at(0)),
+  let title = if transform-title == auto {
+    (
+      course
+        + (
+          en: " Homework",
+          zh: "作业",
+        ).at(lang)
+        + " "
+        + str(number)
     )
-  } else {
-    text(title)
-  }
-  set page(
-    header-ascent: 14pt,
-    header: make-header(header),
-  )
+  } else { transform-title(course, number) }
 
-  // title
-  make-title(
+  show: base-template.with(
+    lang: lang,
+    use-patch: use-patch,
     title: title,
-    other: grid(
-      align: center + bottom,
-      columns: 2,
-      column-gutter: 1em,
-      row-gutter: 0.4em,
-      ..names.zip(ids).flatten()
-    ),
+    author-infos: student-infos,
+    display-author-block: info => {
+      info.name
+      linebreak()
+      info.id
+    },
+    display-author-header: if team-name == none {
+      true
+    } else { _ => text(team-name) },
   )
 
   body
