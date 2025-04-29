@@ -49,7 +49,7 @@
   let sans-serif-fonts = keys.map(key => fonts.at(key).sans-serif).flatten()
   let italic-fonts = keys.map(key => fonts.at(key).italic).flatten()
 
-  show math.equation: set text(font: fonts.base.math)
+  show math.equation: set text(font: (..fonts.base.math, ..serif-fonts))
   set text(font: serif-fonts, lang: lang)
   show emph: set text(font: italic-fonts)
 
