@@ -124,11 +124,6 @@
   show raw.where(block: true): set par(linebreaks: "simple", justify: false)
   // heading
   show heading: strong
-  // page
-  set page(
-    numbering: "1",
-    number-align: center,
-  )
 
   let patches = (
     list: identical-mapping,
@@ -252,6 +247,8 @@
   )
 
   set page(
+    numbering: "1",
+    number-align: center,
     header-ascent: 14pt,
     header: {
       context if make-header and counter(page).get().at(0) != 1 {
