@@ -3,3 +3,4 @@
 #import "bundles/homework.typ"
 #import "utils/font.typ": set-font, fonts
 #import "styles/basic.typ": typesetting, template
+#import "styles/cheatpaper.typ"
