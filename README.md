@@ -18,17 +18,17 @@ Typrest supports Typst 0.12.0 and newer.
 
 At this time there is no release of this project. You need to manually configure your local Typst packages.
 
-- Clone this project to `{data-dir}/typst/packages/local/typreset/0.1.0`, where `data-dir` [depends on your systems](https://github.com/typst/packages#local-packages). For example, in Linux, it is `~/.local/share/typst/packages/local/typreset/0.1.0`:
+- Clone this project to `{data-dir}/typst/packages/local/typreset/0.2.2`, where `data-dir` [depends on your systems](https://github.com/typst/packages#local-packages). For example, in Linux, it is `~/.local/share/typst/packages/local/typreset/0.2.2`:
 
   ```bash
   mkdir -p ~/.local/share/typst/packages/local/typreset/
-  git clone https://github.com/Fr4nk1inCs/typreset.git ~/.local/share/typst/packages/local/typreset/0.2.0
+  git clone https://github.com/Fr4nk1inCs/typreset.git ~/.local/share/typst/packages/local/typreset/0.2.2
   ```
 
 Then you can use the presets in your Typst project:
 
 ```typ
-#import "@local/typreset:0.2.0": *
+#import "@local/typreset:0.2.2": *
 ```
 
 ## Examples
@@ -36,7 +36,7 @@ Then you can use the presets in your Typst project:
 ### Basic Template
 
 ```typ
-#import "@local/typreset:0.2.0": template
+#import "@local/typreset:0.2.2": template
 
 #set page(height: auto)
 #show: template.with(
@@ -54,7 +54,7 @@ For more examples, please see [`docs/template.pdf`](./docs/template.pdf).
 ### Homework
 
 ```typ
-#import "@local/typreset:0.2.0": homework
+#import "@local/typreset:0.2.2": homework
 
 #set page(height: auto)
 #show: homework.template.with(
